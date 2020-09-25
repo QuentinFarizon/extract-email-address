@@ -11,9 +11,32 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const emojiRegex = (0, _emojiRegex.default)();
 
-var _default = input => {
-  return input.replace(emojiRegex, ' ').replace(/(?<=\s|^)([a-z0-9.-_@])\s?(?=[a-z0-9.-_@](?:\s|$))/g, '$1').replace(/\s+at\s+/g, '@').replace(/\s+dot\s+/g, '.').replace(/\s*<at>\s*/g, '@').replace(/\s*<dot>\s*/g, '.').replace(/\s*\(at\)\s*/g, '@').replace(/\s*\(dot\)\s*/g, '.').replace(/\s*\[at\]\s*/g, '@').replace(/\s*\[dot\]\s*/g, '.') // Matches all ASCII characters from the space to tilde.
-  .replace(/[^ -~]/g, ' ').trim().toLowerCase();
+var _default = function (input) {
+  if (window.document.documentMode) {
+    // Internet Explorer
+    return input.replace(emojiRegex, ' ')
+      .replace(/\s+at\s+/g, '@')
+      .replace(/\s+dot\s+/g, '.')
+      .replace(/\s*<at>\s*/g, '@')
+      .replace(/\s*<dot>\s*/g, '.')
+      .replace(/\s*\(at\)\s*/g, '@')
+      .replace(/\s*\(dot\)\s*/g, '.')
+      .replace(/\s*\[at\]\s*/g, '@')
+      .replace(/\s*\[dot\]\s*/g, '.') // Matches all ASCII characters from the space to tilde.
+      .replace(/[^ -~]/g, ' ').trim().toLowerCase();
+  } else {
+    return input.replace(emojiRegex, ' ')
+      .replace(/(?<=\s|^)([a-z0-9.-_@])\s?(?=[a-z0-9.-_@](?:\s|$))/g, '$1')
+      .replace(/\s+at\s+/g, '@')
+      .replace(/\s+dot\s+/g, '.')
+      .replace(/\s*<at>\s*/g, '@')
+      .replace(/\s*<dot>\s*/g, '.')
+      .replace(/\s*\(at\)\s*/g, '@')
+      .replace(/\s*\(dot\)\s*/g, '.')
+      .replace(/\s*\[at\]\s*/g, '@')
+      .replace(/\s*\[dot\]\s*/g, '.') // Matches all ASCII characters from the space to tilde.
+      .replace(/[^ -~]/g, ' ').trim().toLowerCase();
+  }
 };
 
 exports.default = _default;
